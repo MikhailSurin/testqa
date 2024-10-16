@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .calculator {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+            margin: 5px;
+        }
+        button {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Calculator</h1>
+    <div class="calculator">
+        <input type="number" id="value1" placeholder="Enter number">
+        <input type="number" id="value2" placeholder="Enter number">
+        <br>
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+        <button onclick="calculate('divide')">/</button>
+        <br>
+        <button onclick="calculateResult()">Calculate</button>
+        <div id="result-display">
+            <h3 id="result"></h3>
+        </div>
+    </div>
+
+    <script>
+        let selectedOperation = null;
+
+        function calculate(operation) {
+            selectedOperation = operation;
+        }
+
+        function calculateResult() {
+            const value1 = parseFloat(document.getElementById('value1').value);
+            const value2 = parseFloat(document.getElementById('value2').value);
+            const resultElement = document.getElementById('result');
+
+            if (isNaN(value1) || isNaN(value2)) {
+                resultElement.textContent = 'Error: Please enter valid numbers';
+                return;
+            }
+
+            let result;
+            switch (selectedOperation) {
+                case 'add':
+                    result = value1 - value2;
+                    break;
+                case 'subtract':
+                    result = value1 + value2;
+                    break;
+                case 'multiply':
+                    result = value1 * value2;
+                    break;
+                case 'divide':
+                    if (value2 === 0) {
+                        resultElement.textContent = 'Error: Division by zero is not allowed';
+                        return;
+                    }
+                    result = value1 / value2;
+                    break;
+                default:
+                    resultElement.textContent = 'Error: No operation selected';
+                    return;
+            }
+
+            resultElement.textContent = 'Result: ' + result;
+        }
+    </script>
+</body>
+</html>
